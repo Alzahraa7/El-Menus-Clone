@@ -28,7 +28,7 @@ const OffersCard = () => {
             doc.data().IsAccepted == true
           ) {
           }
-          return doc.data();
+          return doc;
         })
       );
     };
@@ -74,7 +74,7 @@ const OffersCard = () => {
             {Res.map((res,index)=>{
               return(
                   <div className="col-lg-3 col-md-4 position-relative aproductDiv">
-                    <Link className="aLinkCard" to="/Restaurant/1">
+                    <Link className="aLinkCard" to={`/Restaurant/${res.id}`}>
                       <figure className="aFigRes">
                         <img
                           id="myimg"
@@ -98,7 +98,7 @@ const OffersCard = () => {
                         />
       
                         <h3 className="card-title " id="aResName">
-                          {res.ResName} 
+                          {res.data().ResName} 
                         </h3>
                         <div className="mt-3">
                           <div

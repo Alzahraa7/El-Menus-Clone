@@ -5,25 +5,66 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import {faPhoneAlt} from "@fortawesome/free-solid-svg-icons";
+import {useEffect,useState} from 'react'
+import {useParams } from 'react-router-dom';
+import { firestore , storage} from "../../firebase/firebase-config";
+import {
+  collection,
+  getDoc,
+  docs,
+  query,doc,
+  collectionGroup,
+} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import {
+    getStorage,
+    ref,
+    getDownloadURL,
+  } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-storage.js";
+  import 'firebase/storage';
 
 const ResDet = ()=>{
+    let id = useParams();
+    id = id.id;
+    const [Res, setRes] = useState([]);
+  const [offer, setOffer] = useState([]);
+
+  const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+
+  useEffect(() => {
+    const getRes = async () => {
+      const data = await getDoc(RestaurantCollecdocRef);
+      setRes(data.data())
+    };
+    getRes();
+    const getLogo = async ()=>{
+      const data = await getDoc(RestaurantCollecdocRef);
+       const url = await getDownloadURL(
+            ref(
+              storage,
+              `ResImges/${data.data().ResName}/Logo_${data.data().ResName}.jpg`
+            ));
+        setOffer(url);
+    }
+    getLogo();
+  });
     return( 
         <> 
+        {console.log(offer)}
         <div className="aLeftDet position-relative col-8 d-flex flex-row mt-3">
                 <div className="aResImgDivL position-relative d-flex flex-column">
                     <div className="aResImgL "> <img className="rounded-circle"
-                            src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/821bd584-51d2-4e28-ba37-e67525880221.jpg"
+                            src={offer}
                             alt="" /> </div>
                     <span className="aOpen p-1 ms-2 position-absolute"> Opens in 10 hours </span>
                 </div>
                 <div className="aResDetL">
                     <div className="aResNameDiv">
-                        <h1 className="aResNameDiv">Restaurant Name</h1>
+                        <h1 className="aResNameDiv">{Res.ResName}</h1>
                     </div>
                     <div className="aSubtitle">
                         <div className="d-flex">
                             <div className="aTypeRes">
-                                Type of restaurant
+                            {Res.Type}
                             </div>
                             <div className="aRateStars ms-2">
                                 <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
@@ -33,7 +74,7 @@ const ResDet = ()=>{
                                 <span><FontAwesomeIcon className="far fa-star"></FontAwesomeIcon></span>
                                 <div className="d-inline-block">
                                     <span>
-                                        rate (#visitors)
+                                    {Res.Rate} (#visitors)
                                     </span>
                                 </div>
                             </div>

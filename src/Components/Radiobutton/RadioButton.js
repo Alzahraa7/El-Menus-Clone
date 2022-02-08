@@ -26,10 +26,6 @@ const RadioButton = (props) => {
       )
       
   }
-  useEffect(()=>{
-    TestQuery(props.data);
-  }
-  )
   return (
     <>
       <div className="col-2">

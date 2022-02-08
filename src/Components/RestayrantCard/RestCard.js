@@ -27,7 +27,7 @@ const RestCard = () => {
             doc.data().IsAccepted == true
           ) {
           }
-          return doc.data();
+          return doc;
         })
       );
     };
@@ -71,7 +71,7 @@ function hello(rate){
               return(
           <div className="col-lg-4 col-md-12">
             <div className="aContentCard">
-              <Link to="/Restaurant/id" className="aLinkCard">
+              <Link to={`/Restaurant/${res.id}`} className="aLinkCard">
                 <div className="card aD">
                   <figure className="aFigRes position-relative">
                     <img
@@ -102,17 +102,17 @@ function hello(rate){
                           className="rounded-3 me-3 "
                         />
                         <h3 id="aResName">
-                          {res.ResName}
+                          {res.data().ResName}
                           <br />
                           
                           {
-                         k = hello(res.Rate)
+                         k = hello(res.data().Rate)
                          }
                          {
                              k.forEach(i=> i)
                          }
                           
-                          <span id="aResType">{res.Type+" , "}</span>
+                          <span id="aResType">{res.data().Type+" , "}</span>
                         </h3>
                       </div>
                     </div>
