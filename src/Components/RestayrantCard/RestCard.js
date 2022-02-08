@@ -1,23 +1,48 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faCircle, faStreetView } from "@fortawesome/free-solid-svg-icons";
-import { firestore } from "../../firebase/firebase-config";
+import { firestore ,storage } from "../../firebase/firebase-config";
 import {
     collection,
-    getDocs,
-    docs,
+    getDocs,getDoc,
+    doc,docs,
     query,
     collectionGroup,
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+  import {
+    getStorage,
+    ref,
+    getDownloadURL,
+  } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-storage.js";
+  import 'firebase/storage';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const RestCard = () => {
     const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
-
+  const [logo, setLogo] = useState([]);
+  const [attract,setAttract] = useState([])
   const RestaurantCollecRef = collection(firestore, "Restaurant");
-
+let arr=[]; let arr2=[];
   useEffect(() => {
+    const getLogo = async (id)=>{
+    const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+      const data = await getDoc(RestaurantCollecdocRef);
+       const url = await getDownloadURL(
+            ref(
+              storage,
+              `ResImges/${data.data().ResName}/Logo_${data.data().ResName}.jpg`
+            ));
+        const url2 = await getDownloadURL(
+              ref(
+                storage,
+                `ResImges/${data.data().ResName}/Atract_${data.data().ResName}.jpg`
+              ));
+              arr.push(url)
+              setLogo(arr);
+            arr2.push(url2)
+        setAttract(arr2);
+    }
     const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
@@ -27,6 +52,7 @@ const RestCard = () => {
             doc.data().IsAccepted == true
           ) {
           }
+          getLogo(doc.id)
           return doc;
         })
       );
@@ -73,9 +99,9 @@ function hello(rate){
             <div className="aContentCard">
               <Link to={`/Restaurant/${res.id}`} className="aLinkCard">
                 <div className="card aD">
-                  <figure className="aFigRes position-relative">
+                  <figure className="aFigRes position-relative"> 
                     <img
-                      src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/11f6836e-26a0-4a7a-ab99-5f99c025a67c.jpg"
+                      src={attract[index]}
                       className="aImg card-img-top"
                       alt="..."
                     />
@@ -97,7 +123,7 @@ function hello(rate){
                       <div className=" d-flex bd-highlight flex-row align-items-start">
                         <img
                           id="aImgRes"
-                          src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/fce4e598-a3a8-11e8-b2ca-0242ac110002.jpg"
+                          src={logo[index]}
                           alt=""
                           className="rounded-3 me-3 "
                         />

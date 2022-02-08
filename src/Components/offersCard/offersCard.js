@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { firestore } from "../../firebase/firebase-config";
+import { firestore , storage } from "../../firebase/firebase-config";
 import {
   collection,
   getDocs,
-  docs,
+  docs,doc,getDoc,
   query,
   collectionGroup,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import {
+  getStorage,
+  ref,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-storage.js";
+import 'firebase/storage';
 import "../Delivery.scss";
 import "../mixins.scss";
 import "../main-style.css";
@@ -15,10 +21,31 @@ import "../main-style.css";
 const OffersCard = () => {
   const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
-
+  const [logo, setLogo] = useState([]);
+  const [attract,setAttract] = useState([])
   const RestaurantCollecRef = collection(firestore, "Restaurant");
+  
+  let arr=[]; let arr2=[];
 
   useEffect(() => {
+    const getLogo = async (id)=>{
+      const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+        const data = await getDoc(RestaurantCollecdocRef);
+         const url = await getDownloadURL(
+              ref(
+                storage,
+                `ResImges/${data.data().ResName}/Logo_${data.data().ResName}.jpg`
+              ));
+          const url2 = await getDownloadURL(
+                ref(
+                  storage,
+                  `ResImges/${data.data().ResName}/Atract_${data.data().ResName}.jpg`
+                ));
+                arr.push(url)
+                setLogo(arr);
+              arr2.push(url2)
+          setAttract(arr2);
+      }
     const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
@@ -28,6 +55,7 @@ const OffersCard = () => {
             doc.data().IsAccepted == true
           ) {
           }
+          getLogo(doc.id)
           return doc;
         })
       );
@@ -78,7 +106,7 @@ const OffersCard = () => {
                       <figure className="aFigRes">
                         <img
                           id="myimg"
-                          src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/2ee22548-148d-426e-9423-a6150ac149fc.jpg" //{/*url2*/}
+                          src={attract[index]} //{/*url2*/}
                           className="card-img-top aImgCard"
                           alt="..."
                         />
@@ -92,7 +120,7 @@ const OffersCard = () => {
                       <div className=" position-relative card-body aCardBody">
                         <img
                           id="aImgRes"
-                          src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/7ce1525f-bba1-4434-bd64-22a440fb74fb.jpg" //{/*url1*/}
+                          src={logo[index]} //{/*url1*/}
                           alt=""
                           className="rounded-3 me-3 float-start"
                         />
