@@ -25,7 +25,7 @@ const RestCard = () => {
   const RestaurantCollecRef = collection(firestore, "Restaurant");
 let arr=[]; let arr2=[];
   useEffect(() => {
-    const getLogo = async (id)=>{
+    /*const getLogo = async (id)=>{
     const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
       const data = await getDoc(RestaurantCollecdocRef);
        const url = await getDownloadURL(
@@ -42,7 +42,7 @@ let arr=[]; let arr2=[];
               setLogo(arr);
             arr2.push(url2)
         setAttract(arr2);
-    }
+    }*/
     const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
@@ -52,7 +52,7 @@ let arr=[]; let arr2=[];
             doc.data().IsAccepted == true
           ) {
           }
-          getLogo(doc.id)
+          //getLogo(doc.id)
           return doc;
         })
       );
@@ -101,7 +101,7 @@ function hello(rate){
                 <div className="card aD">
                   <figure className="aFigRes position-relative"> 
                     <img
-                      src={attract[index]}
+                      src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7464943-bbb6-4643-8359-4fb1180bc3b5.jpg"//{attract[index]}
                       className="aImg card-img-top"
                       alt="..."
                     />
@@ -123,7 +123,7 @@ function hello(rate){
                       <div className=" d-flex bd-highlight flex-row align-items-start">
                         <img
                           id="aImgRes"
-                          src={logo[index]}
+                          src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7464943-bbb6-4643-8359-4fb1180bc3b5.jpg"//{logo[index]}
                           alt=""
                           className="rounded-3 me-3 "
                         />

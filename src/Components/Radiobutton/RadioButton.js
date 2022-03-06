@@ -11,7 +11,8 @@ import {
     where,
     collectionGroup,
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
-import {useState,useEffect} from 'react'
+import {useState,useEffect} from 'react';
+useEffect((),[])
 const RadioButton = (props) => {
   const [offer, setOffer] = useState([]);
   const TestQuery = async(el)=>{
