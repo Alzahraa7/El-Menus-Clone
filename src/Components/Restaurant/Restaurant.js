@@ -10,19 +10,20 @@ import Menu from "./Menus";
 import About from "./About";
 import Branches from "./Branches";
 import Reviews from "./Reviews";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function SwitchCase(props) {
-    switch(props.value) {
-      case 'Menu':
-        return <Menu />;
-      case 'About':
-        return <About />;
-      case 'Branches':
-        return <Branches />;
-      default:
-          return <Reviews />
-    }
+  switch (props.value) {
+    case "Menu":
+      return <Menu />;
+    case "About":
+      return <About />;
+    case "Branches":
+      return <Branches />;
+    default:
+      return <Reviews />;
   }
+}
 
 const Restaurant = () => {
   const [data, setData] = useState("Menu");
@@ -81,8 +82,29 @@ const Restaurant = () => {
               </div>
             </div>
           </div>
-          <div className="tab-content" id="pills-tabContent">
-            <SwitchCase value={data} />
+        </div>
+        <div className="tab-content" id="pills-tabContent">
+          <div className="row">
+            <div className="col-9">
+              <SwitchCase value={data} />
+            </div>
+            <div className="col-3">
+              <div className="aDeliverAddr">
+                <div className="d-flex flex-column">
+                  <span className="aMotoIcon">
+                    <FontAwesomeIcon className="fas fa-motorcycle"></FontAwesomeIcon>
+                  </span>
+                  <p className="aDeliverto">
+                    <span>Delivers to</span>
+                    Corniche El Maadi Maadi
+                  </p>
+                  <button className="btn">
+                    Change Address{" "}
+                    <FontAwesomeIcon className="fas   float-right"></FontAwesomeIcon>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

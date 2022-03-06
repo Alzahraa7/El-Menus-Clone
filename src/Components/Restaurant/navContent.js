@@ -1,12 +1,12 @@
-import '../main-style.css'
-import '../Restaurant.scss'
-import '../mixins.scss'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-const NavContent = (props) =>{
-    return(
-        <>
-{/* <div className="tab-pane fade show active" id={props.data} role="tabpanel" aria-labelledby="pills-home-tab">
+import "../main-style.css";
+import "../Restaurant.scss";
+import "../mixins.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+const NavContent = (props) => {
+  return (
+    <>
+      {/* <div className="tab-pane fade show active" id={props.data} role="tabpanel" aria-labelledby="pills-home-tab">
                     <div className="aScrollSpy">
                         <div className="row">
                             <div className="col-3">
@@ -311,9 +311,7 @@ const NavContent = (props) =>{
                     </div>
 
                 </div> */}
-        
-       
-  </>
-    )
-}
+    </>
+  );
+};
 export default NavContent;
