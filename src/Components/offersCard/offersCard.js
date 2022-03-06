@@ -28,25 +28,7 @@ const OffersCard = () => {
   let arr=[]; let arr2=[];
 
   useEffect(() => {
-   /* const getLogo = async (id)=>{
-      const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
-        const data = await getDoc(RestaurantCollecdocRef);
-         const url = await getDownloadURL(
-              ref(
-                storage,
-                `ResImges/${data.data().ResName}/Logo_${data.data().ResName}.jpg`
-              ));
-          const url2 = await getDownloadURL(
-                ref(
-                  storage,
-                  `ResImges/${data.data().ResName}/Atract_${data.data().ResName}.jpg`
-                ));
-                arr.push(url)
-                setLogo(arr);
-              arr2.push(url2)
-          setAttract(arr2);
-     // }*/
-    const getRes = async () => {
+   const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
@@ -106,7 +88,7 @@ const OffersCard = () => {
                       <figure className="aFigRes">
                         <img
                           id="myimg"
-                          src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7464943-bbb6-4643-8359-4fb1180bc3b5.jpg"//{attract[index]} //{/*url2*/}
+                          src={res.data().ImgURL}
                           className="card-img-top aImgCard"
                           alt="..."
                         />
@@ -120,7 +102,8 @@ const OffersCard = () => {
                       <div className=" position-relative card-body aCardBody">
                         <img
                           id="aImgRes"
-                          src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7464943-bbb6-4643-8359-4fb1180bc3b5.jpg"//{logo[index]} //{/*url1*/}
+                   
+                          src={res.data().ImgLogo}
                           alt=""
                           className="rounded-3 me-3 float-start"
                         />

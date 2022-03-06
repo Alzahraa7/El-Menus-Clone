@@ -1,0 +1,4 @@
+@use "mixins";
+.aboutDivInfo{
+  @include mixins.backgrounds(#F1F2F2);
+}

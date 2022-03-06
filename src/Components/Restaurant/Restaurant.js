@@ -1,55 +1,92 @@
-import '../main-style.css'
-import '../Restaurant.scss'
-import '../mixins.scss'
-import ResCover from './ResCover/Rescover';
-import ResDet from './ResDetails';
-import NavBills from './navbills';
-import NavContent from './navContent'
-const Restaurant = () =>{
-    return(
-        <>
-        <ResCover pcode="Code" offerdisc="Discounts on orders above 120 EGP Expires: in a month" />
-        
-        <div class="aRestDetDiv container-fluid">
-            <div class="row ">
-                <ResDet />
-            </div>
+import "../main-style.css";
+import "../Restaurant.scss";
+import "../mixins.scss";
+import ResCover from "./ResCover/Rescover";
+import ResDet from "./ResDetails";
+import NavBills from "./navbills";
+import NavContent from "./navContent";
+import { useEffect, useState } from "react";
+import Menu from "./Menus";
+import About from "./About";
+import Branches from "./Branches";
+import Reviews from "./Reviews";
+
+function SwitchCase(props) {
+    switch(props.value) {
+      case 'Menu':
+        return <Menu />;
+      case 'About':
+        return <About />;
+      case 'Branches':
+        return <Branches />;
+      default:
+          return <Reviews />
+    }
+  }
+
+const Restaurant = () => {
+  const [data, setData] = useState("Menu");
+  return (
+    <>
+      <ResCover
+        pcode="Code"
+        offerdisc="Discounts on orders above 120 EGP Expires: in a month"
+      />
+
+      <div className="aRestDetDiv container-fluid">
+        <div className="row ">
+          <ResDet />
         </div>
+      </div>
 
-        <hr style={{width: "90%", margin: "5px auto", color: "gray", borderBottom: "2px solid gray"}} />
+      <hr
+        style={{
+          width: "90%",
+          margin: "5px auto",
+          color: "gray",
+          borderBottom: "2px solid gray",
+        }}
+      />
 
-        <div class="container-fluid aTapsDiv mt-4">
-            <div class="row">
-                <div class="col-6">
-                    <NavBills />
-                </div>
-                <div className="tab-content" id="pills-tabContent">
-                <NavContent id="pills-home" />
-                </div>
-                <div class="col-6">
-                <div class="d-flex flex-row justify-content-end">
-                    <div class="ms-3" style={{width:"fitContent"}}>
-                        <span class="d-inline-block aIcont"><i class="fas fa-map-marker-alt"></i></span>
-                        <p class="d-inline-block aIcont">Live Tracking</p>
-                    </div>
-                    <div class="ms-3" style={{width:"fitContent"}}>
-                        <span class="d-inline-block aIcond"><i class="fas fa-motorcycle"></i></span>
-                        <p class="d-inline-block aIcond">45 mins</p>
-                    </div>
-                    <div class="ms-3" style={{width:"fitContent"}}>
-                        <span class="d-inline-block aIconw"><i class="fas fa-wallet"></i></span>
-                        <p class="d-inline-block aIconw">0 Egp</p>
-                    </div>
-                    <div class="ms-3" style={{width:"fitContent"}}>
-                        <span class="d-inline-block aIconc"><i class="far fa-clock"></i></span>
-                        <p class="d-inline-block aIconc">02:00 PM - 01:30 AM</p>
-                    </div>
-                </div>
+      <div className="container-fluid aTapsDiv mt-4">
+        <div className="row">
+          <div className="col-6">
+            <NavBills setData={setData} />
+          </div>
+          <div className="col-6">
+            <div className="d-flex flex-row justify-content-end">
+              <div className="ms-3" style={{ width: "fitContent" }}>
+                <span className="d-inline-block aIcont">
+                  <i className="fas fa-map-marker-alt"></i>
+                </span>
+                <p className="d-inline-block aIcont">Live Tracking</p>
+              </div>
+              <div className="ms-3" style={{ width: "fitContent" }}>
+                <span className="d-inline-block aIcond">
+                  <i className="fas fa-motorcycle"></i>
+                </span>
+                <p className="d-inline-block aIcond">45 mins</p>
+              </div>
+              <div className="ms-3" style={{ width: "fitContent" }}>
+                <span className="d-inline-block aIconw">
+                  <i className="fas fa-wallet"></i>
+                </span>
+                <p className="d-inline-block aIconw">0 Egp</p>
+              </div>
+              <div className="ms-3" style={{ width: "fitContent" }}>
+                <span className="d-inline-block aIconc">
+                  <i className="far fa-clock"></i>
+                </span>
+                <p className="d-inline-block aIconc">02:00 PM - 01:30 AM</p>
+              </div>
             </div>
-            </div>
+          </div>
+          <div className="tab-content" id="pills-tabContent">
+            <SwitchCase value={data} />
+          </div>
         </div>
-
-        </>
-    )
-}
+      </div>
+    </>
+  );
+};
 export default Restaurant;

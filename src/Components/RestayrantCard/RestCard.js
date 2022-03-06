@@ -25,25 +25,7 @@ const RestCard = () => {
   const RestaurantCollecRef = collection(firestore, "Restaurant");
 let arr=[]; let arr2=[];
   useEffect(() => {
-    /*const getLogo = async (id)=>{
-    const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
-      const data = await getDoc(RestaurantCollecdocRef);
-       const url = await getDownloadURL(
-            ref(
-              storage,
-              `ResImges/${data.data().ResName}/Logo_${data.data().ResName}.jpg`
-            ));
-        const url2 = await getDownloadURL(
-              ref(
-                storage,
-                `ResImges/${data.data().ResName}/Atract_${data.data().ResName}.jpg`
-              ));
-              arr.push(url)
-              setLogo(arr);
-            arr2.push(url2)
-        setAttract(arr2);
-    }*/
-    const getRes = async () => {
+   const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
       setRes(
         data.docs.map((doc) => {
@@ -52,7 +34,6 @@ let arr=[]; let arr2=[];
             doc.data().IsAccepted == true
           ) {
           }
-          //getLogo(doc.id)
           return doc;
         })
       );
@@ -101,7 +82,7 @@ function hello(rate){
                 <div className="card aD">
                   <figure className="aFigRes position-relative"> 
                     <img
-                      src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7464943-bbb6-4643-8359-4fb1180bc3b5.jpg"//{attract[index]}
+                      src={res.data().ImgURL}//{attract[index]}
                       className="aImg card-img-top"
                       alt="..."
                     />
@@ -123,7 +104,7 @@ function hello(rate){
                       <div className=" d-flex bd-highlight flex-row align-items-start">
                         <img
                           id="aImgRes"
-                          src="	https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7464943-bbb6-4643-8359-4fb1180bc3b5.jpg"//{logo[index]}
+                          src={res.data().ImgLogo}//{logo[index]}
                           alt=""
                           className="rounded-3 me-3 "
                         />

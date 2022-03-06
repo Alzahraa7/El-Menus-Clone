@@ -3,13 +3,10 @@ import '../Restaurant.scss'
 import '../mixins.scss'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-
-
 const NavContent = (props) =>{
     return(
         <>
-<div className="tab-pane fade show active" id={props.id} role="tabpanel" aria-labelledby="pills-home-tab">
-
+{/* <div className="tab-pane fade show active" id={props.data} role="tabpanel" aria-labelledby="pills-home-tab">
                     <div className="aScrollSpy">
                         <div className="row">
                             <div className="col-3">
@@ -293,6 +290,9 @@ const NavContent = (props) =>{
                                     </div>
                                 </div>
                             </div>
+
+
+
                             <div className="col-3">
                                 <div className="aDeliverAddr">
                                     <div className="d-flex flex-column">
@@ -310,8 +310,10 @@ const NavContent = (props) =>{
                         </div>
                     </div>
 
-                </div>
-        </>
+                </div> */}
+        
+       
+  </>
     )
 }
 export default NavContent;

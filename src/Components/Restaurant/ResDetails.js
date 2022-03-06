@@ -2,9 +2,7 @@ import '../main-style.css'
 import '../Restaurant.scss'
 import '../mixins.scss'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
-import {faPhoneAlt} from "@fortawesome/free-solid-svg-icons";
+import {faStar,faMapMarkerAlt,faPhoneAlt} from "@fortawesome/free-solid-svg-icons";
 import {useEffect,useState} from 'react'
 import {useParams } from 'react-router-dom';
 import { firestore , storage} from "../../firebase/firebase-config";
@@ -15,12 +13,6 @@ import {
   query,doc,
   collectionGroup,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
-import {
-    getStorage,
-    ref,
-    getDownloadURL,
-  } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-storage.js";
-  import 'firebase/storage';
 
 const ResDet = ()=>{
     let id = useParams();
@@ -36,7 +28,7 @@ const ResDet = ()=>{
       setRes(data.data())
     };
     getRes();
-    const getLogo = async ()=>{
+    /*const getLogo = async ()=>{
       const data = await getDoc(RestaurantCollecdocRef);
        const url = await getDownloadURL(
             ref(
@@ -45,36 +37,40 @@ const ResDet = ()=>{
             ));
         setOffer(url);
     }
-    getLogo();
+    getLogo();*/
   });
+  const Res1 = {
+      ReName:"Mcdonald's",
+      
+  }
     return( 
         <> 
         {console.log(offer)}
         <div className="aLeftDet position-relative col-8 d-flex flex-row mt-3">
                 <div className="aResImgDivL position-relative d-flex flex-column">
                     <div className="aResImgL "> <img className="rounded-circle"
-                            src={offer}
+                            src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/4b182745-abbb-4926-9069-ac05ba1e1841.jpg"  //{Res.ImgLogo} 
                             alt="" /> </div>
                     <span className="aOpen p-1 ms-2 position-absolute"> Opens in 10 hours </span>
                 </div>
                 <div className="aResDetL">
                     <div className="aResNameDiv">
-                        <h1 className="aResNameDiv">{Res.ResName}</h1>
+                        <h1 className="aResNameDiv"> Mcdonald's {/*{Res.ResName}*/}</h1>
                     </div>
                     <div className="aSubtitle">
                         <div className="d-flex">
                             <div className="aTypeRes">
-                            {Res.Type}
+                             Work or study    {/* {Res.Type} */}
                             </div>
                             <div className="aRateStars ms-2">
                                 <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
                                 <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
                                 <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
                                 <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
-                                <span><FontAwesomeIcon className="far fa-star"></FontAwesomeIcon></span>
+                                <span><FontAwesomeIcon  icon={faStar}></FontAwesomeIcon></span>
                                 <div className="d-inline-block">
                                     <span>
-                                    {Res.Rate} (#visitors)
+                                    4.4{/* {Res.Rate} (#visitors) */}
                                     </span>
                                 </div>
                             </div>
