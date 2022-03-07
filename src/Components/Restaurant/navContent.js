@@ -6,7 +6,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 const NavContent = (props) => {
   return (
     <>
-      {/* <div className="tab-pane fade show active" id={props.data} role="tabpanel" aria-labelledby="pills-home-tab">
+      {/* 
+      <div className="tab-pane fade show active" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div className="aScrollSpy">
                         <div className="row">
                             <div className="col-3">

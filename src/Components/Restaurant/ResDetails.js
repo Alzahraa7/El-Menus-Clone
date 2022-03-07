@@ -20,7 +20,7 @@ const ResDet = ()=>{
     const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
 
-  const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+  /*const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
 
   useEffect(() => {
     const getRes = async () => {
@@ -38,7 +38,7 @@ const ResDet = ()=>{
         setOffer(url);
     }
     getLogo();*/
-  });
+  //});
   const Res1 = {
       ReName:"Mcdonald's",
       

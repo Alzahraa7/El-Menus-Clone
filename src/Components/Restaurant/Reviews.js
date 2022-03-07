@@ -3,8 +3,9 @@ import { faStar as fastar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import "../Review.scss";
+import ReviewForm from "./reviewForm";
 const Reviews = () => {
-  const[addReview,setAddReview] = useState(false);
+  const[addReview,setAddReview] = useState(true);
   return (
     <>
       <div class="tab-content" id="myTabContent">
@@ -14,9 +15,11 @@ const Reviews = () => {
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          <div className="container-fluid">
+          {
+            addReview?
+            <div className="container-fluid">
             <div className="float-end mb-3">
-              <button className="btn rounded-3 btnAddReview" onClick={setAddReview(true)}>Add Review</button>
+              <button className="btn rounded-3 btnAddReview" onClick={()=>setAddReview(false)}>Add Review</button>
             </div>
             <div style={{ clear: "both" }}></div>
             <div className="row">
@@ -108,6 +111,9 @@ const Reviews = () => {
               </div>
             </div>
           </div>
+            :
+            <ReviewForm setAddReview={setAddReview} />
+          }
         </div>
       </div>
     </>
