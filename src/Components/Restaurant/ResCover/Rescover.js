@@ -1,11 +1,37 @@
 import '../../main-style.css'
 import '../../Restaurant.scss'
 import '../../mixins.scss'
+import { firestore } from "../../../firebase/firebase-config";
+import {
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  docs,
+  query,
+  collectionGroup,
+} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 const ResCover = (props) => {
+    let id = useParams();
+    id = id.id;
+    const [Res, setRes] = useState([]);
+
+  const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+
+  useEffect(() => {
+    const getRes = async () => {
+      const data = await getDoc(RestaurantCollecdocRef);
+      setRes(data.data())
+    };
+    getRes();
+   
+  });
     return(
         <>
         <div className="aDivImgCover">
-        <img className="aImgCover" src="https://www.elmenus.com/public/img/default-cover.png" alt="" />
+        <img className="aImgCover" src={Res.ImgCover} alt="" />
         <div>
             <div className="aDivPromo">
                 <h3>

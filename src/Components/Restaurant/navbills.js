@@ -1,7 +1,6 @@
 import "../main-style.css";
 import "../Restaurant.scss";
 import "../mixins.scss";
-import NavContent from "./navContent";
 import {useState} from 'react'
 import { useHistory } from "react-router-dom";
 const NavBills = ({setData}) => {

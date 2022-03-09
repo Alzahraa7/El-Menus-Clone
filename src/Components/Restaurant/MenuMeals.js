@@ -111,7 +111,9 @@ const Meals = (props) => {
                             ></FontAwesomeIcon>{" "}
                           </span>
                             {" "}
-                               <p className="d-inline-block aDishPrice"> {j.Size[0].Price +'-'+ j.Size[(j.Size.length)-1].Price} EGP </p>
+                               <p className="d-inline-block aDishPrice">{(j.Size[0].Price === j.Size[(j.Size.length)-1].Price)
+                               ?j.Size[0].Price:
+                               j.Size[0].Price +'-'+ j.Size[(j.Size.length)-1].Price} EGP </p>
                         </div>
                       </div>
                       <div className="ms-auto">

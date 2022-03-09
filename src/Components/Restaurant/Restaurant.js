@@ -4,13 +4,13 @@ import "../mixins.scss";
 import ResCover from "./ResCover/Rescover";
 import ResDet from "./ResDetails";
 import NavBills from "./navbills";
-import NavContent from "./navContent";
 import { useEffect, useState } from "react";
 import Menu from "./Menus";
 import About from "./About";
 import Branches from "./Branches";
 import Reviews from "./Reviews";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faClock, faMapMarkerAlt, faMotorcycle, faWallet } from "@fortawesome/free-solid-svg-icons";
 
 function SwitchCase(props) {
   switch (props.value) {
@@ -58,25 +58,25 @@ const Restaurant = () => {
             <div className="d-flex flex-row justify-content-end">
               <div className="ms-3" style={{ width: "fitContent" }}>
                 <span className="d-inline-block aIcont">
-                  <i className="fas fa-map-marker-alt"></i>
+                  <FontAwesomeIcon icon={faMapMarkerAlt}></FontAwesomeIcon>
                 </span>
                 <p className="d-inline-block aIcont">Live Tracking</p>
               </div>
               <div className="ms-3" style={{ width: "fitContent" }}>
                 <span className="d-inline-block aIcond">
-                  <i className="fas fa-motorcycle"></i>
+                  <FontAwesomeIcon icon={faMotorcycle}></FontAwesomeIcon>
                 </span>
                 <p className="d-inline-block aIcond">45 mins</p>
               </div>
               <div className="ms-3" style={{ width: "fitContent" }}>
                 <span className="d-inline-block aIconw">
-                  <i className="fas fa-wallet"></i>
+                  <FontAwesomeIcon icon={faWallet}></FontAwesomeIcon>
                 </span>
                 <p className="d-inline-block aIconw">0 Egp</p>
               </div>
               <div className="ms-3" style={{ width: "fitContent" }}>
                 <span className="d-inline-block aIconc">
-                  <i className="far fa-clock"></i>
+                  <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>
                 </span>
                 <p className="d-inline-block aIconc">02:00 PM - 01:30 AM</p>
               </div>
@@ -96,11 +96,11 @@ const Restaurant = () => {
                   </span>
                   <p className="aDeliverto">
                     <span>Delivers to</span>
-                    Corniche El Maadi Maadi
+                    Corniche El Maadi
                   </p>
                   <button className="btn">
                     Change Address{" "}
-                    <FontAwesomeIcon className="fas   float-right"></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faArrowRight} className="float-right"></FontAwesomeIcon>
                   </button>
                 </div>
               </div>
