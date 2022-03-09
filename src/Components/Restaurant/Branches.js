@@ -21,7 +21,7 @@ const Branches = () => {
     firestore,
     "Restaurant",
     id,
-    "Branch"
+    "Branches"
   );
 
   useEffect(() => {
@@ -55,17 +55,23 @@ const Branches = () => {
             </div>
             <div className="d-flex flex-column">
               <ul>
+                {branch.map(i=>{
+                  return(
+                    <>
                 <li>
-                  <h4>Branch Name</h4>
-                  <p>- Area Name</p>
+                  <h4>{i.LocName}</h4>
+                  <p>- {i.Address}</p>
                   <FontAwesomeIcon icon={faClock} />{" "}
-                  <span className="aboutDivText"> Working hours </span>
-                  <p>- Area Name</p>
+                  <span className="aboutDivText"> {i.Workinghours} </span>
+                  <p>- {i.Address}</p>
                 </li>
+                <hr className="m-3 text-secondary" />
+                    </>
+                  )
+                })}
               </ul>
             </div>
           </div>
-          <hr className="m-3 text-secondary" />
         </div>
       </div>
     </>
