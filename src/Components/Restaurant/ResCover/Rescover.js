@@ -17,8 +17,10 @@ const ResCover = (props) => {
     let id = useParams();
     id = id.id;
     const [Res, setRes] = useState([]);
+    const [offer, setOffer] = useState([]);
 
   const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+  const OffersCollecRef = collection(firestore, "Restaurant",id,'Offers');
 
   useEffect(() => {
     const getRes = async () => {
@@ -26,26 +28,45 @@ const ResCover = (props) => {
       setRes(data.data())
     };
     getRes();
+
+    const getOffer = async () => {
+        const data = await getDocs(OffersCollecRef);
+        setOffer(
+            data.docs.map((doc)=>{
+                return {...doc.data(),id:doc.id}
+            })
+        )
+      };
+      getOffer();
    
   });
     return(
         <>
         <div className="aDivImgCover">
         <img className="aImgCover" src={Res.ImgCover} alt="" />
-        <div>
+        {(offer===[])&&
+        (<div>
             <div className="aDivPromo">
-                <h3>
-                    30 EGP on orders above 120 EGP
+                    {offer.map(off=>{
+               return(
+                   <>
+               <h3>
+                        {off.Description}
                 </h3>
                 <h5>
-                    {props.offerdisc}
+                   Expires: {off.Expires}
                 </h5>
+                </>
+                    )})}
                 <div className="ms-3 aPromoActivation">
-                    <span className=" p-1"> {props.pcode} </span>
+                    <span className=" p-1"> {offer.map(off=>{
+                        return off.PromoCode;
+                    })} </span>
                     <button className="btn float-end"> Apply offer </button>
                 </div>
             </div>
-        </div>
+        </div>)
+        }
     </div>
         </>
     )

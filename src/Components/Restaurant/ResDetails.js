@@ -84,11 +84,6 @@ let k;
                          {
                              k.forEach(i=> i)
                          }
-                                <div className="d-inline-block">
-                                    <span>
-                                    {Res.Rate} (#visitors) 
-                                    </span>
-                                </div>
                             </div>
                         </div>
                         <div className="aResAddress d-flex mt-2">
