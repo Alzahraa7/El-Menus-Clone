@@ -73,11 +73,11 @@ const Meals = (props) => {
         setTimeout(()=>{
             sessionStorage.setItem('reloadCount', String(reloadCount + 1));
             window.location.reload();
-        },2)
+        },2000)
       } else {
           setTimeout(()=>{
               sessionStorage.removeItem('reloadCount');
-          },2)
+          },2000)
       }
   },[counter])
   return (

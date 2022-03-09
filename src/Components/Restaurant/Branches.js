@@ -1,10 +1,40 @@
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../About.scss";
+import { firestore , storage} from "../../firebase/firebase-config";
+import {
+  collection,
+  getDoc,
+  getDocs,
+  query,doc,docs,
+  collectionGroup,
+} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+
 const Branches = () => {
   let id = useParams();
   id = id.id;
+  const [branch, setBranch] = useState([]);
+
+  const BranchesCollecdocRef = collection(
+    firestore,
+    "Restaurant",
+    id,
+    "Branch"
+  );
+
+  useEffect(() => {
+    const getBranches = async () =>{
+      const data = await getDocs(BranchesCollecdocRef);
+        setBranch(
+          data.docs.map((doc) => {
+            return doc.data();
+          })
+        )
+      };
+      getBranches();
+  });
   return (
     <>
       <div class="tab-content" id="myTabContent">
