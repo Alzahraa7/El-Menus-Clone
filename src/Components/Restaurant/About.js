@@ -9,7 +9,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import GoogleMapReact from "google-map-react";
 import { faStar, faSun } from "@fortawesome/free-regular-svg-icons";
-
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { firestore , storage} from "../../firebase/firebase-config";
+import {
+  collection,
+  getDoc,
+  getDocs,
+  query,doc,docs,
+  collectionGroup,
+} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 const About = () => {
   const defaultProps = {
     center: {
@@ -18,6 +27,34 @@ const About = () => {
     },
     zoom: 11,
   };
+  let id = useParams();
+  id = id.id;
+  const [Res, setRes] = useState([]);
+  const [branch, setBranches] = useState([]);
+
+
+const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+const BranchesCollecdocRef = collection(firestore, "Restaurant", id, 'Branches')
+
+useEffect(() => {
+  const getRes = async () => {
+    const data = await getDoc(RestaurantCollecdocRef);
+    setRes(data.data())
+  };
+  getRes();
+
+  const getBranches = async () =>{
+    const data = await getDocs(BranchesCollecdocRef);
+      setBranches(
+        data.docs.map((doc) => {
+          return doc.data();
+        })
+      )
+    };
+    getBranches();
+  
+
+});
   return (
     <>
       <div class="tab-content" id="myTabContent">
@@ -31,15 +68,20 @@ const About = () => {
             <div className="d-flex p-2 flex-column">
               <div>
                 <FontAwesomeIcon icon={faHome} />{" "}
-                <span className="aboutDivText"> Phone number </span>
+                <span className="aboutDivText"> {Res.Phone} </span>
               </div>
               <div>
                 <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
-                <span className="aboutDivText"> Branches </span>
+                {branch.map((res,index)=>{
+                  return <span className="aboutDivText"> {res.LocName} </span>
+                })}
               </div>
               <div>
                 <FontAwesomeIcon icon={faClock} />{" "}
-                <span className="aboutDivText"> Working hours </span>
+                {branch.map((res,index)=>{
+                  return <span className="aboutDivText"> {res.Workinghours} </span>
+                })}
+                
               </div>
             </div>
           </div>
@@ -47,7 +89,10 @@ const About = () => {
           <div>
             <div>
               <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
-              <span className="aboutDivText"> Address </span>
+              {branch.map((res,index)=>{
+                  return <span className="aboutDivText"> {res.Address} </span>
+                })}
+              
             </div>
             <div style={{ height: "50vh", width: "100%" }}>
               <GoogleMapReact
@@ -63,13 +108,17 @@ const About = () => {
             <div className="row mb-5">
               <div className="col-3">
                 <FontAwesomeIcon icon={faClock} />{" "}
+                
                 <span style={{ fontSize: "20px", lineHeight: "29px" }}>
                   {" "}
                   Working hours{" "}
                 </span>
               </div>
               <div className="col-4">
-                <b> sat -Fri</b> 9 Am - 2 Pm
+              {branch.map((res,index)=>{
+                  return <p><b> {res.Workinghours} </b></p>
+                })}
+                
               </div>
             </div>
             <div className="row mb-5">
@@ -81,7 +130,9 @@ const About = () => {
                 </span>
               </div>
               <div className="col-4">
-                <b> sat -Fri</b> 9 Am - 2 Pm
+              {branch.map((res,index)=>{
+                  return <p><b> {res.Workinghours} </b></p>
+                })}
               </div>
             </div>
             <div className="row">
@@ -178,9 +229,11 @@ const About = () => {
                 </span>
               </div>
               <div className="col-4">
+                
                   <div className="rounded-pill" style={{backgroundColor:'#c5c5c5', width:'fit-content'}}>
-                <p className="mt-3 p-2 text-white"> Types </p>
+                <p className="mt-3 p-2 text-white"> {Res.Type} {" "} </p>
                   </div>
+                  
               </div>
             </div>
             </div>

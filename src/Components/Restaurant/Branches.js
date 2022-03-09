@@ -1,7 +1,10 @@
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useParams } from "react-router-dom";
 import "../About.scss";
 const Branches = () => {
+  let id = useParams();
+  id = id.id;
   return (
     <>
       <div class="tab-content" id="myTabContent">

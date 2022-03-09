@@ -18,9 +18,8 @@ const ResDet = ()=>{
     let id = useParams();
     id = id.id;
     const [Res, setRes] = useState([]);
-  const [offer, setOffer] = useState([]);
 
-  /*const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+  const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
 
   useEffect(() => {
     const getRes = async () => {
@@ -28,39 +27,25 @@ const ResDet = ()=>{
       setRes(data.data())
     };
     getRes();
-    /*const getLogo = async ()=>{
-      const data = await getDoc(RestaurantCollecdocRef);
-       const url = await getDownloadURL(
-            ref(
-              storage,
-              `ResImges/${data.data().ResName}/Logo_${data.data().ResName}.jpg`
-            ));
-        setOffer(url);
-    }
-    getLogo();*/
-  //});
-  const Res1 = {
-      ReName:"Mcdonald's",
-      
-  }
+   
+  });
     return( 
         <> 
-        {console.log(offer)}
         <div className="aLeftDet position-relative col-8 d-flex flex-row mt-3">
                 <div className="aResImgDivL position-relative d-flex flex-column">
                     <div className="aResImgL "> <img className="rounded-circle"
-                            src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/4b182745-abbb-4926-9069-ac05ba1e1841.jpg"  //{Res.ImgLogo} 
+                            src={Res.ImageLogo} 
                             alt="" /> </div>
                     <span className="aOpen p-1 ms-2 position-absolute"> Opens in 10 hours </span>
                 </div>
                 <div className="aResDetL">
                     <div className="aResNameDiv">
-                        <h1 className="aResNameDiv"> Mcdonald's {/*{Res.ResName}*/}</h1>
+                        <h1 className="aResNameDiv"> {Res.ResName}</h1>
                     </div>
                     <div className="aSubtitle">
                         <div className="d-flex">
                             <div className="aTypeRes">
-                             Work or study    {/* {Res.Type} */}
+                            {Res.Type}
                             </div>
                             <div className="aRateStars ms-2">
                                 <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
@@ -70,7 +55,7 @@ const ResDet = ()=>{
                                 <span><FontAwesomeIcon  icon={faStar}></FontAwesomeIcon></span>
                                 <div className="d-inline-block">
                                     <span>
-                                    4.4{/* {Res.Rate} (#visitors) */}
+                                    {Res.Rate} (#visitors) 
                                     </span>
                                 </div>
                             </div>

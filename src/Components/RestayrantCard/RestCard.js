@@ -9,21 +9,13 @@ import {
     query,
     collectionGroup,
   } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
-  import {
-    getStorage,
-    ref,
-    getDownloadURL,
-  } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-storage.js";
-  import 'firebase/storage';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 const RestCard = () => {
     const [Res, setRes] = useState([]);
   const [offer, setOffer] = useState([]);
-  const [logo, setLogo] = useState([]);
-  const [attract,setAttract] = useState([])
   const RestaurantCollecRef = collection(firestore, "Restaurant");
-let arr=[]; let arr2=[];
   useEffect(() => {
    const getRes = async () => {
       const data = await getDocs(RestaurantCollecRef);
@@ -82,7 +74,7 @@ function hello(rate){
                 <div className="card aD">
                   <figure className="aFigRes position-relative"> 
                     <img
-                      src={res.data().ImgURL}//{attract[index]}
+                      src={res.data().ImagURL}//{attract[index]}
                       className="aImg card-img-top"
                       alt="..."
                     />
@@ -104,7 +96,7 @@ function hello(rate){
                       <div className=" d-flex bd-highlight flex-row align-items-start">
                         <img
                           id="aImgRes"
-                          src={res.data().ImgLogo}//{logo[index]}
+                          src={res.data().ImageLogo}//{logo[index]}
                           alt=""
                           className="rounded-3 me-3 "
                         />

@@ -3,12 +3,12 @@ import "../Restaurant.scss";
 import "../mixins.scss";
 import NavContent from "./navContent";
 import {useState} from 'react'
+import { useHistory } from "react-router-dom";
 const NavBills = ({setData}) => {
     const handleClick = (data)=>{
         setData(data)
     }
     const[id, setId] = useState('');
-
   return (
     <>
       <ul className="nav nav-pills mb-3 try" id="pills-tab" role="tablist">
@@ -22,7 +22,7 @@ const NavBills = ({setData}) => {
             role="tab"
             aria-controls="Menu"
             aria-selected="true"
-            onClick={()=>{setData('Menu')}}
+            onClick={()=>{setData('Menu');}}
           >
             Menu
           </button>

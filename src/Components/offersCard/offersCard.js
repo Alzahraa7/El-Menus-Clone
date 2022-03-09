@@ -88,7 +88,7 @@ const OffersCard = () => {
                       <figure className="aFigRes">
                         <img
                           id="myimg"
-                          src={res.data().ImgURL}
+                          src={res.data().ImageURL}
                           className="card-img-top aImgCard"
                           alt="..."
                         />
@@ -103,7 +103,7 @@ const OffersCard = () => {
                         <img
                           id="aImgRes"
                    
-                          src={res.data().ImgLogo}
+                          src={res.data().ImageLogo}
                           alt=""
                           className="rounded-3 me-3 float-start"
                         />
