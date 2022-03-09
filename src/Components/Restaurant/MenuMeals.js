@@ -69,15 +69,13 @@ const Meals = (props) => {
   let counter = 0;
   const reloadCount = sessionStorage.getItem('reloadCount');
   useEffect(()=>{
-    if(reloadCount < 2) {
+    if(reloadCount < 1) {
         setTimeout(()=>{
             sessionStorage.setItem('reloadCount', String(reloadCount + 1));
             window.location.reload();
         },2000)
       } else {
-          setTimeout(()=>{
               sessionStorage.removeItem('reloadCount');
-          },2000)
       }
   },[counter])
   return (
@@ -91,7 +89,6 @@ const Meals = (props) => {
         tabindex="0"
       >
         <section>
-            {/* {window.location.reload()} */}
           {Meals?.map((i, index) => {
             index += 1;
             // console.log(i)
@@ -113,10 +110,8 @@ const Meals = (props) => {
                               icon={faPlusCircle}
                             ></FontAwesomeIcon>{" "}
                           </span>
-                          <p className="d-inline-block aDishPrice">
                             {" "}
-                            35 - 55 EGP
-                          </p>
+                               <p className="d-inline-block aDishPrice"> {j.Size[0].Price +'-'+ j.Size[(j.Size.length)-1].Price} EGP </p>
                         </div>
                       </div>
                       <div className="ms-auto">

@@ -49,8 +49,8 @@ const Branches = () => {
               <div>
                 <h5>Branches</h5>
               </div>
-              <div>
-                <p>Count of branches</p>
+              <div className="me-5">
+                <p style={{fontSize:'20px',color:'gray',fontWeight:'bold'}}>{branch.length}</p>
               </div>
             </div>
             <div className="d-flex flex-column">

@@ -71,15 +71,22 @@ useEffect(() => {
                 <span className="aboutDivText"> {Res.Phone} </span>
               </div>
               <div>
-                <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
                 {branch.map((res,index)=>{
-                  return <span className="aboutDivText"> {res.LocName} </span>
+                  return (<>
+                    <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
+                  <span className="aboutDivText"> {res.LocName} </span> <br />
+                  </>
+                  )
                 })}
               </div>
               <div>
-                <FontAwesomeIcon icon={faClock} />{" "}
                 {branch.map((res,index)=>{
-                  return <span className="aboutDivText"> {res.Workinghours} </span>
+                  return(
+                    <>
+                    <FontAwesomeIcon icon={faClock} />{" "}
+                    <span className="aboutDivText"> {res.Workinghours} </span><br/>
+                    </>
+                  )
                 })}
                 
               </div>
@@ -88,9 +95,13 @@ useEffect(() => {
 
           <div>
             <div>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
               {branch.map((res,index)=>{
-                  return <span className="aboutDivText"> {res.Address} </span>
+                return(
+                  <>
+                  <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
+                  <span className="aboutDivText"> {res.Address} </span><br/>
+                    </>
+                  ) 
                 })}
               
             </div>
@@ -162,62 +173,26 @@ useEffect(() => {
               </div>
               <div className="col-4">
                 <div className="row">
-                  <div className="col">
+                  {branch.map(i=>{
+                    return(
+                      <>
+                  <div className="col-4">
                     <div
                       style={{
                         borderRadius: "50%",
                         backgroundColor: "#cecece",
                         width: "50px",
                         height: "50px",
+                        position:'relative'
                       }}
                     >
-                      <p className="ms-4">S</p>{" "}
-                      {/* slice the name of the area */}
+                      <p style={{right:'19px',top:'10px', position:'absolute', fontSize:'17px'}}><b>{i.LocName[0]}</b></p>{" "}
                     </div>
-                    <p>Area name</p>
+                    <p>{i.LocName}</p>
                   </div>
-                  <div className="col">
-                    <div
-                      style={{
-                        borderRadius: "50%",
-                        backgroundColor: "#cecece",
-                        width: "50px",
-                        height: "50px",
-                      }}
-                    >
-                      <p className="ms-4">S</p>{" "}
-                      {/* slice the name of the area */}
-                    </div>
-                    <p>Area name</p>
-                  </div>
-                  <div className="col">
-                    <div
-                      style={{
-                        borderRadius: "50%",
-                        backgroundColor: "#cecece",
-                        width: "50px",
-                        height: "50px",
-                      }}
-                    >
-                      <p className="ms-4">S</p>{" "}
-                      {/* slice the name of the area */}
-                    </div>
-                    <p>Area name</p>
-                  </div>
-                  <div className="col">
-                    <div
-                      style={{
-                        borderRadius: "50%",
-                        backgroundColor: "#cecece",
-                        width: "50px",
-                        height: "50px",
-                      }}
-                    >
-                      <p className="ms-4">S</p>{" "}
-                      {/* slice the name of the area */}
-                    </div>
-                    <p>Area name</p>
-                  </div>
+                      </>
+                    )
+                  })}
                 </div>
               </div>
               <div className="row">
