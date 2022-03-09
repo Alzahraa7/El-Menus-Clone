@@ -10,7 +10,7 @@ import {
   collection,
   getDoc,
   docs,
-  query,doc,
+  query,doc,getDocs,
   collectionGroup,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 
@@ -18,8 +18,10 @@ const ResDet = ()=>{
     let id = useParams();
     id = id.id;
     const [Res, setRes] = useState([]);
+    const [Branch, setBranch] = useState([]);
 
   const RestaurantCollecdocRef = doc(firestore, "Restaurant",id);
+  const BranchesCollecRef = collection(firestore, "Restaurant",id,'Branches');
 
   useEffect(() => {
     const getRes = async () => {
@@ -27,8 +29,36 @@ const ResDet = ()=>{
       setRes(data.data())
     };
     getRes();
+    const getBranches = async () => {
+        const data = await getDocs(BranchesCollecRef);
+        setBranch(data.docs.map((doc)=>{
+            return {...doc.data(),id:doc.id}
+        }))
+      };
+      getBranches();
    
   });
+let k;
+  function Rating(rate){
+    let count = 0 ;
+    let span=[];
+    for(let i =0 ; i<Math.floor(rate); i++){
+        count++;
+          span.push(<FontAwesomeIcon
+         style={{ color: "gold", fontSize: "12px" }}
+         icon={faStar}
+         className="flex-fill"
+       ></FontAwesomeIcon>)
+    }
+    for(let i =count; i<5 ; i++){
+        span.push( <FontAwesomeIcon
+        style={{ color: "gray", fontSize: "12px" }}
+        icon={faStar}
+        className="flex-fill"
+      ></FontAwesomeIcon>)
+    }
+    return span;
+}
     return( 
         <> 
         <div className="aLeftDet position-relative col-8 d-flex flex-row mt-3">
@@ -48,11 +78,12 @@ const ResDet = ()=>{
                             {Res.Type}
                             </div>
                             <div className="aRateStars ms-2">
-                                <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
-                                <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
-                                <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
-                                <span><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></span>
-                                <span><FontAwesomeIcon  icon={faStar}></FontAwesomeIcon></span>
+                            {
+                         k = Rating(Res.Rate)
+                         }
+                         {
+                             k.forEach(i=> i)
+                         }
                                 <div className="d-inline-block">
                                     <span>
                                     {Res.Rate} (#visitors) 
@@ -62,7 +93,9 @@ const ResDet = ()=>{
                         </div>
                         <div className="aResAddress d-flex mt-2">
                             <span><FontAwesomeIcon icon={faMapMarkerAlt}></FontAwesomeIcon>&nbsp;</span>
-                            <p>Restaurant address </p>
+                            {Branch.map((i)=>{
+                                return <p> {i.Address}</p>
+                            })}
                         </div>
                     </div>
                 </div>
