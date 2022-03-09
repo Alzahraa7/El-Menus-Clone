@@ -32,7 +32,7 @@ const Menu = () => {
       const data = await getDocs(RestaurantCollecdocRef);
       setRes(
         data.docs.map((doc) => {
-          return doc.data();
+          return {...doc.data(),id:doc.id}
         })
       );
     };
@@ -61,7 +61,7 @@ const Menu = () => {
                   style={{ position: "sticky", top: "10rem" }}
                 >
                   {Res.map((res) => {
-                      localStorage.setItem('MenuId',res.MenuID);
+                      localStorage.setItem('MenuId',res.id);
                       localStorage.setItem('MenuName',res.Name);
                     return res.Name.map((resIn, index) => {index++
                       return (

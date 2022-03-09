@@ -26,37 +26,39 @@ const Meals = (props) => {
   let CategArray = localStorage.getItem("MenuName").split(",");
 
   let l = 0;
-  useEffect(() => {
+  useEffect(() => {l+=1;
     const getRes = async () => {
-      const data = await getDocs(RestaurantCollecdocRef);
-      setRes(
-        data.docs.map((doc) => {
-          return doc.data();
-        })
-      );
-    };
-    getRes();
-    const getMeals = async () => {
-      let refCatCollecs = [];
-      CategArray.map((i) => {
-        refCatCollecs.push(
-          collection(
-            firestore,
-            "Restaurant",
-            id,
-            "Menu",
-            localStorage.getItem("MenuId"),
-            i
-          )
-        );
-      });
+        const data = await getDocs(RestaurantCollecdocRef);
+        setRes(
+            data.docs.map((doc) => {
+                return doc.data();
+            })
+            );
+        };
+        getRes();
+        const getMeals = async () => {
+            let refCatCollecs = [];
+            CategArray.map((i) => {
+                refCatCollecs.push(
+                    collection(
+                        firestore,
+                        "Restaurant",
+                        id,
+                        "Menu",
+                        localStorage.getItem("MenuId"),
+                        i
+                        )
+                        );
+                    });
       let arrMeals = [];
       refCatCollecs.map(async (i) => {
         let data = await getDocs(i);
         arrMeals.push(
           data.docs.map((meal) => {
             //arrMeals.push(meal.data());
+                   
             return { ...meal.data() };
+            
           })
         );
         setMeals(arrMeals);
@@ -65,8 +67,21 @@ const Meals = (props) => {
     getMeals();
   }, [l]);
   let counter = 0;
+  const reloadCount = sessionStorage.getItem('reloadCount');
+  useEffect(()=>{
+    if(reloadCount < 2) {
+        setTimeout(()=>{
+            sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+            window.location.reload();
+        },2)
+      } else {
+          setTimeout(()=>{
+              sessionStorage.removeItem('reloadCount');
+          },2)
+      }
+  },[counter])
   return (
-    <>
+      <>
       <div
         className="aItemsDiv ms-3"
         data-bs-spy="scroll"
@@ -76,6 +91,7 @@ const Meals = (props) => {
         tabindex="0"
       >
         <section>
+            {/* {window.location.reload()} */}
           {Meals?.map((i, index) => {
             index += 1;
             // console.log(i)
